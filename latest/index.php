@@ -1,15 +1,3 @@
-No — I wouldn’t call that “sure”.
-
-**Why:** User-Agent detection is unreliable. Many non-browser tools either don’t use a recognizable User-Agent, or they *do* use one that looks “browser-like”, and different clients handle `<object type="image/svg+xml">` vs inline SVG differently. So the `curl|link2` check is only a heuristic.
-
-Also, your earlier “area” HTML should not contain a second `<body>` tag (that’s invalid HTML). Below is a clean **PHP** version that:
-
-- switches to **inline SVG output** when the User-Agent suggests a `curl`/`link2`-like client
-- otherwise uses a normal `<object>` embedding
-- keeps everything in **English**
-- does not put a `<body>` tag inside other tags
-
-```php
 <?php
 $ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
@@ -120,6 +108,3 @@ header('Content-Type: text/html; charset=UTF-8');
 <?php endif; ?>
 </body>
 </html>
-```
-
-If you tell me what exactly you want for the “curl/link2” case (inline SVG like above, or instead your *table area* HTML), I’ll adjust the `if` block accordingly.
